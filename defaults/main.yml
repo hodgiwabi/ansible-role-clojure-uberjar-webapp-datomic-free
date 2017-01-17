@@ -1,5 +1,4 @@
 ---
-datomic_db_name: {{ clojure_uberjar_webapp_app_name }}
 datomic_user: datomic
 datomic_group: {{ datomic_user }}
 datomic_version: "0.9.5344"
