@@ -1,41 +1,41 @@
 - name: Create datomic user.
   user: name="{{ datomic_user }}" state=present
   tags:
-    - provision
+    - install
 
 - name: Create datomic directory
   file: state=directory path="{{ datomic_dir }}" owner="{{ datomic_user }}" group="{{ datomic_user }}" mode=755
   tags:
-    - provision
+    - install
     
 - name: Create datomic data directory
   file: state=directory path="{{ datomic_data_dir }}" owner="{{ datomic_user }}" group="{{ datomic_group }}" mode=755
   tags:
-    - provision
+    - install
 
 - name: Make datomic log directory
   file: state=directory path="{{ datomic_log_dir }}" owner="{{ datomic_user }}" group="{{ datomic_group }}" mode=755
   tags:
-    - provision
+    - install
   
 - name: Check datomic installation
   stat: path="{{ datomic_dir }}/runtime"
   register: datomic_link
   ignore_errors: true
   tags:
-    - provision
+    - install
 
 - name: Download datomic
   get_url: url="{{ datomic_download_url }}" dest="{{ datomic_dir }}/{{ datomic_filename }}"
   when: not datomic_link.stat.exists
   tags:
-    - provision
+    - install
 
 - name: Unpack datomic
   command: chdir="{{ datomic_dir }}" unzip "{{ datomic_filename }}"
   when: not datomic_link.stat.exists
   tags:
-    - provision
+    - install
 
 - name: Link datomic
   file: src="{{ datomic_dir }}/datomic-free-{{ datomic_version }}"
@@ -46,12 +46,12 @@
   when: not datomic_link.stat.exists
   notify: restart datomic
   tags:
-    - provision
+    - install
     
 - name: datomic dir permissions
   shell: chown -R datomic:datomic "{{ datomic_dir }}/{{ datomic_filename }}"
   tags:
-    - provision
+    - install
 
 - name: Upload datomic properties file
   template: src=templates/datomic-transactor.properties.j2 dest={{ datomic_dir }}/transactor.properties
