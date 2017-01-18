@@ -3,6 +3,11 @@
   tags:
     - provision
 
+- name: Create datomic directory
+  file: state=directory path="{{ datomic_dir }}" owner="{{ datomic_user }}" group="{{ datomic_user }}"
+  tags:
+    - provision
+    
 - name: Create datomic data directory
   file: state=directory path="{{ datomic_data_dir }}" owner="{{ datomic_user }}" group="{{ datomic_group }}" mode=755
   tags:
@@ -17,12 +22,6 @@
   stat: path="{{ datomic_dir }}/runtime"
   register: datomic_link
   ignore_errors: true
-  tags:
-    - provision
-
-- name: Create datomic directory
-  file: state=directory path="{{ datomic_dir }}" owner=datomic group=datomic
-  when: not datomic_link.stat.exists
   tags:
     - provision
 
