@@ -4,7 +4,7 @@
     - provision
 
 - name: Create datomic directory
-  file: state=directory path="{{ datomic_dir }}" owner="{{ datomic_user }}" group="{{ datomic_user }}"
+  file: state=directory path="{{ datomic_dir }}" owner="{{ datomic_user }}" group="{{ datomic_user }}" mode=755
   tags:
     - provision
     
@@ -14,7 +14,7 @@
     - provision
 
 - name: Make datomic log directory
-  file: state=directory path="{{ datomic_log_dir }}" owner="{{ datomic_user }}" group="{{ datomic_group }}"
+  file: state=directory path="{{ datomic_log_dir }}" owner="{{ datomic_user }}" group="{{ datomic_group }}" mode=755
   tags:
     - provision
   
