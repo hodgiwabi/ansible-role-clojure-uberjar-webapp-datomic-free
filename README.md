@@ -32,21 +32,11 @@ Example Playbook
 - hosts: webservers
   become: true
   become_method: sudo
-  vars:
-    clojure_uberjar_webapp_domain: "localhost"
   roles:
     - "sweet-tooth-clojure.clojure-uberjar-webapp-common"
-    - "sweet-tooth-clojure.clojure-uberjar-webapp-app"
     - "sweet-tooth-clojure.clojure-uberjar-webapp-nginx"
-
-- hosts: database
-  become: true
-  become_method: sudo
-  vars:
-    clojure_uberjar_webapp_domain: "localhost"
-  roles:
-    - "sweet-tooth-clojure.clojure-uberjar-webapp-common"
-    - "sweet-tooth-clojure.datomic-free"
+    - "sweet-tooth-clojure.clojure-uberjar-webapp-datomic-free"
+    - "sweet-tooth-clojure.clojure-uberjar-webapp-app"
 ```
 
 License
