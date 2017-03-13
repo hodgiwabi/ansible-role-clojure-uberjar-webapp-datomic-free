@@ -11,5 +11,4 @@
     DB_URI: "{{ datomic_uri }}"
   tags:
     - deploy
-    - database
     - migration

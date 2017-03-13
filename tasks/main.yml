@@ -63,7 +63,12 @@
   notify: restart datomic
   tags:
     - configure
-  
+
+- name: Upload datomic env config file
+  template: src=templates/datomic-env.j2 dest="{{ datomic_env_path }}"
+  tags:
+    - configure
+    
 - name: Upload datomic upstart config file
   template: src=templates/datomic-upstart.conf.j2 dest=/etc/init/datomic.conf
   notify: restart datomic

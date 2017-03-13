@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-role-datomic-free
+    - ansible-role-clojure-uberjar-webapp-datomic-free
