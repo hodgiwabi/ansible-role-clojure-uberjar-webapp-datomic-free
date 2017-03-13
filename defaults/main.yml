@@ -7,7 +7,10 @@ datomic_dir: /var/lib/datomic
 datomic_data_dir: /var/lib/datomic/data
 datomic_log_dir: /var/log/datomic
 datomic_filename: "datomic.zip"
-datomic_uri: "datomic:free://localhost:4334/{{ datomic_db_name }}"
+datomic_port: 4334
+datomic_db_name: "{{ clojure_uberjar_webapp_app_name }}"
+datomic_uri: "datomic:free://localhost:{{datomic_port}}/{{ datomic_db_name }}"
+datomic_env_path: "{{ clojure_uberjar_webapp_app_config_dir }}/.datomic"
 
 # used by upstart
 datomic_command: "cd {{ datomic_dir }}/runtime; {{ datomic_dir }}/runtime/bin/transactor -Xms400m -Xmx400m {{ datomic_dir }}/transactor.properties 2>&1 >> {{ datomic_log_dir }}/datomic.log"
