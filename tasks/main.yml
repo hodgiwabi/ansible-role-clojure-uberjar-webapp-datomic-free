@@ -32,12 +32,15 @@
     - install
 
 - name: Install unzip package
-  apt: pkg=unzip state=installed update-cache=yes
+  apt: pkg=unzip state=present update-cache=yes
   tags:
     - install
   
 - name: Unpack datomic
-  command: chdir="{{ datomic_dir }}" unzip "{{ datomic_filename }}"
+  unarchive:
+    src: "{{ datomic_dir }}/{{ datomic_filename }}"
+    dest: "{{ datomic_dir }}"
+    remote_src: yes
   when: not datomic_link.stat.exists
   tags:
     - install
@@ -54,7 +57,12 @@
     - install
     
 - name: datomic dir permissions
-  shell: chown -R datomic:datomic "{{ datomic_dir }}/{{ datomic_filename }}"
+  file:
+    path: "{{ datomic_dir }}"
+    owner: "{{ datomic_user }}"
+    group: "{{ datomic_group }}"
+    state: directory
+    recurse: true
   tags:
     - install
 
@@ -69,8 +77,8 @@
   tags:
     - configure
     
-- name: Upload datomic upstart config file
-  template: src=templates/datomic-upstart.conf.j2 dest=/etc/init/datomic.conf
+- name: Upload datomic systemd config file
+  template: src=templates/datomic.service.j2 dest=/etc/systemd/system/datomic.service
   notify: restart datomic
   tags:
     - configure

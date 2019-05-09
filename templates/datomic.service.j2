@@ -1,0 +1,11 @@
+[Unit]
+Description=Service for datomic free
+Documentation=https://github.com/sweet-tooth-clojure/ansible-role-clojure-uberjar-webapp-datomic-free
+User=datomic
+
+[Service]
+ExecStart={{ datomic_command }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
