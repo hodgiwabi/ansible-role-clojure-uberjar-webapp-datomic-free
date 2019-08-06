@@ -13,9 +13,12 @@ datomic_uri: "datomic:free://localhost:{{datomic_port}}/{{ datomic_db_name }}"
 datomic_env_path: "{{ clojure_uberjar_webapp_app_config_dir }}/.datomic"
 
 # used by systemd
-datomic_command: "{{ datomic_dir }}/runtime/bin/transactor -Xms600m -Xmx600m {{ datomic_dir }}/transactor.properties"
+datomic_command: "{{ datomic_dir }}/runtime/bin/transactor -Xms200m -Xmx400m {{ datomic_dir }}/transactor.properties"
 
 # transactor properties
 datomic_transactor_memory_index_threshold: "32m"
 datomic_transactor_memory_index_max: "128m"
 datomic_transactor_object_cache_max: "128m"
+
+clojure_uberjar_webapp_app_install_datomic_schemas_local_path: "templates/install-schemas.sh.j2"
+clojure_uberjar_webapp_app_install_datomic_schemas_command: "java -Xms200m -Xmx300m -jar {{ clojure_uberjar_webapp_app_jar_name }} db/install-schemas"

@@ -82,3 +82,18 @@
   notify: restart datomic
   tags:
     - configure
+
+- name: Enable datomic systemd
+  systemd:
+    name: datomic
+    enabled: yes
+  become: yes
+  become_method: sudo
+  tags:
+    - install
+
+- name: Copy install schemas script
+  template: src="{{ clojure_uberjar_webapp_app_install_datomic_schemas_local_path }}" dest="{{ clojure_uberjar_webapp_app_root }}/install-schemas.sh" mode=755
+  tags:
+    - deploy
+    - check

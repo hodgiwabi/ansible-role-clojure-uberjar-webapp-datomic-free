@@ -1,6 +1,11 @@
 ########### free mode config ###############
 protocol=free
 host=localhost
+
+# setting this to true causes an SSL exception when using java 11
+# super bad! I know!
+encrypt-channel=false 
+
 #free mode will use 3 ports starting with this one:
 port=4334
 log-dir={{ datomic_log_dir }}
