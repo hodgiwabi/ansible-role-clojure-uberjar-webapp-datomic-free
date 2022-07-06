@@ -11,4 +11,4 @@ galaxy_info:
   galaxy_tags:
     - datomic
 dependencies:
-  - sweet-tooth-clojure.clojure-uberjar-webapp-common
+  - hodgiwabi.clojure-uberjar-webapp-common
