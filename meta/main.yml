@@ -11,4 +11,4 @@ galaxy_info:
   galaxy_tags:
     - datomic
 dependencies:
-  - hodgiwabi.clojure-uberjar-webapp-common
+  - hodgiwabi.ansible_role_clojure_uberjar_webapp_common
