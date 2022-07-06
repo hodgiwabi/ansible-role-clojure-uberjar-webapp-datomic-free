@@ -32,7 +32,7 @@
     - install
 
 - name: Install unzip package
-  apt: pkg=unzip state=installed update-cache=yes
+  apt: pkg=unzip state=present update-cache=yes
   tags:
     - install
   
